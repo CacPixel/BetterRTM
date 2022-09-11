@@ -1,0 +1,126 @@
+--- a/jp/ngt/rtm/rail/TileEntityLargeRailCore.java
++++ b/jp/ngt/rtm/rail/TileEntityLargeRailCore.java
+@@ -29,11 +29,11 @@
+    public boolean colliding = false;
+    private int signal = 0;
+    private ResourceStateRail state = new ResourceStateRail(RTMResource.RAIL, this);
+    public final List<ResourceStateRail> subRails = new ArrayList<>();
+    protected RailPosition[] railPositions;
+-   protected RailMap railmap;
++   public RailMap railmap;
+    @SideOnly(Side.CLIENT)
+    private AxisAlignedBB renderAABB;
+    @SideOnly(Side.CLIENT)
+    public GLObject[] glLists;
+    @SideOnly(Side.CLIENT)
+@@ -61,11 +61,11 @@
+       }
+ 
+       this.subRails.clear();
+       NBTTagList nbttaglist = nbt.getTagList("SubRails", 10);
+ 
+-      for(int i = 0; i < nbttaglist.tagCount(); ++i) {
++      for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+          NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+          ResourceStateRail resourcestaterail = new ResourceStateRail(RTMResource.RAIL, this);
+          resourcestaterail.readFromNBT(nbttagcompound);
+          this.subRails.add(resourcestaterail);
+       }
+@@ -89,11 +89,11 @@
+ 
+    public void writeRailStates(NBTTagCompound nbt) {
+       nbt.setTag("State", this.state.writeToNBT());
+       NBTTagList nbttaglist = new NBTTagList();
+ 
+-      for(ResourceStateRail resourcestaterail : this.subRails) {
++      for (ResourceStateRail resourcestaterail : this.subRails) {
+          nbttaglist.appendTag(resourcestaterail.writeToNBT());
+       }
+ 
+       nbt.setTag("SubRails", nbttaglist);
+    }
+@@ -171,11 +171,11 @@
+    }
+ 
+    @SideOnly(Side.CLIENT)
+    private void deleteGLList() {
+       if (this.glLists != null) {
+-         for(GLObject globject : this.glLists) {
++         for (GLObject globject : this.glLists) {
+             GLHelper.deleteGLList(globject);
+          }
+       }
+ 
+       GLHelper.deleteGLList(this.railBlocks);
+@@ -192,11 +192,11 @@
+    public void addSubRail(ResourceStateRail state) {
+       ResourceStateRail resourcestaterail = new ResourceStateRail(RTMResource.RAIL, this);
+       resourcestaterail.readFromNBT(state.writeToNBT());
+       ResourceStateRail resourcestaterail1 = null;
+ 
+-      for(ResourceStateRail resourcestaterail2 : this.subRails) {
++      for (ResourceStateRail resourcestaterail2 : this.subRails) {
+          if (resourcestaterail2.getResourceName().equals(resourcestaterail.getResourceName())) {
+             resourcestaterail1 = resourcestaterail2;
+             break;
+          }
+       }
+@@ -253,12 +253,12 @@
+       return this.railmap;
+    }
+ 
+    @Nullable
+    public RailMap[] getAllRailMaps() {
+-      RailMap railmap = this.getRailMap((Entity)null);
+-      return railmap != null ? new RailMap[]{railmap} : null;
++      RailMap railmap = this.getRailMap((Entity) null);
++      return railmap != null ? new RailMap[] { railmap } : null;
+    }
+ 
+    @SideOnly(Side.CLIENT)
+    public double getMaxRenderDistanceSquared() {
+       return NGTUtil.getChunkLoadDistanceSq();
+@@ -281,12 +281,15 @@
+    }
+ 
+    @SideOnly(Side.CLIENT)
+    protected AxisAlignedBB getRenderAABB() {
+       AABBInt aabbint = this.getRailSize();
+-      AxisAlignedBB axisalignedbb = new AxisAlignedBB((double)(aabbint.minX - 1), (double)aabbint.minY, (double)(aabbint.minZ - 1), (double)(aabbint.maxX + 2), (double)(aabbint.maxY + 2), (double)(aabbint.maxZ + 2));
+-      return axisalignedbb.maxX - axisalignedbb.minX <= 3.0D && axisalignedbb.maxZ - axisalignedbb.minZ <= 3.0D ? null : axisalignedbb;
++      AxisAlignedBB axisalignedbb = new AxisAlignedBB((double) (aabbint.minX - 1), (double) aabbint.minY,
++            (double) (aabbint.minZ - 1), (double) (aabbint.maxX + 2), (double) (aabbint.maxY + 2),
++            (double) (aabbint.maxZ + 2));
++      return axisalignedbb.maxX - axisalignedbb.minX <= 3.0D && axisalignedbb.maxZ - axisalignedbb.minZ <= 3.0D ? null
++            : axisalignedbb;
+    }
+ 
+    public AABBInt getRailSize() {
+       int i = this.railPositions[0].blockX;
+       int j = this.railPositions[0].blockY;
+@@ -306,11 +309,11 @@
+    public void setPos(int x, int y, int z, int prevX, int prevY, int prevZ) {
+       int i = x - prevX;
+       int j = y - prevY;
+       int k = z - prevZ;
+ 
+-      for(RailPosition railposition : this.railPositions) {
++      for (RailPosition railposition : this.railPositions) {
+          railposition.movePos(i, j, k);
+       }
+ 
+       super.setPos(x, y, z, prevX, prevY, prevZ);
+    }
+@@ -323,11 +326,11 @@
+ 
+       this.shouldRerenderBlock = this.shouldRerenderRail = true;
+    }
+ 
+    public int[] getSelectorPos() {
+-      return new int[]{this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()};
++      return new int[] { this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() };
+    }
+ 
+    public boolean closeGui(ResourceState par1) {
+       return true;
+    }

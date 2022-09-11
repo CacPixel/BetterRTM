@@ -1,0 +1,21 @@
+# DO NOT EDIT FILES IN THIS DIRECTORY
+# files in this directory are auto generated files by pathing mod
+# please do not edit and please do not ignore files in this directory
+---
+mods:
+  ngtlib:
+    patch-path: src/main/ngtlib-patches
+    source-path: src/main/ngtlib
+    unmodifieds-jar: build/patching-mod/mods/ngtlib/ngtlib-2.4.19-unmodifieds.jar
+    source-jar: curse/ngtlib/2.4.19/ngtlib-2.4.19-snapshot-20171003-deobf-1.5.498.12-sources.jar
+    deobf-jar: curse/ngtlib/2.4.19/ngtlib-2.4.19-snapshot-20171003-deobf.jar
+    changed-classes: []
+  realtrainmod:
+    patch-path: src/main/rtm-patches
+    source-path: src/main/rtm
+    unmodifieds-jar: build/patching-mod/mods/realtrainmod/realtrainmod-2.4.22-unmodifieds.jar
+    source-jar: curse/realtrainmod/2.4.22/realtrainmod-2.4.22-snapshot-20171003-deobf-1.5.498.12-sources.jar
+    deobf-jar: curse/realtrainmod/2.4.22/realtrainmod-2.4.22-snapshot-20171003-deobf.jar
+    changed-classes:
+      - jp.ngt.rtm.rail.TileEntityLargeRailCore
+      - jp.ngt.rtm.render.RailPartsRendererBase

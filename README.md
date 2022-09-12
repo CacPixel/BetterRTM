@@ -7,9 +7,9 @@ Some further & stable functions will be added to [fixRTM](https://github.com/fix
 
 
 
-## Issue
+## Todo
 
-Because mod-patching is strange. It's only for fixRTM. The build in this project can't take effects to RTM. All patch files are correct. It will (may) be solved in the future.
+Need to apply patches to RTM.
 
 
 
